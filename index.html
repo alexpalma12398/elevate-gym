@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elevate Gym and Racquet — Chihuahua</title>
+  <meta name="description" content="Gimnasio + canchas de raqueta en Chihuahua. Membresía desde $500/mes. Av. Agustín Melgar 3505.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --azul: #29ABE2;
+      --azul-dark: #1A8BBF;
+      --azul-glow: rgba(41,171,226,0.25);
+      --gris: #555555;
+      --oscuro: #0D0D0D;
+      --oscuro-soft: #1A1A1A;
+      --oscuro-card: #202020;
+      --blanco: #FFFFFF;
+      --gris-claro: #E8E8E8;
+      --gris-mid: #999999;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Barlow',sans-serif;background:var(--oscuro);color:var(--blanco);overflow-x:hidden}
+
+    /* ── NAV ── */
+    nav{position:sticky;top:0;z-index:100;background:rgba(13,13,13,0.96);backdrop-filter:blur(14px);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:66px;border-bottom:1px solid rgba(41,171,226,0.15)}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .nav-logo img{width:40px;height:40px;border-radius:8px;object-fit:contain;background:#fff;padding:3px;flex-shrink:0}
+    .nav-logo-text{display:flex;flex-direction:column;line-height:1.1}
+    .nav-logo-text .name{font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:900;color:var(--blanco);letter-spacing:2px;text-transform:uppercase;white-space:nowrap}
+    .nav-logo-text .name em{color:var(--azul);font-style:normal}
+    .nav-logo-text .sub{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;font-weight:600;color:var(--azul);letter-spacing:3px;text-transform:uppercase;white-space:nowrap}
+    .nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+    .nav-links a{text-decoration:none;color:rgba(255,255,255,0.65);font-weight:600;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.8px;transition:color 0.2s}
+    .nav-links a:hover{color:var(--azul)}
+    .nav-cta{background:var(--azul)!important;color:white!important;padding:8px 20px;border-radius:4px;transition:background 0.2s,transform 0.2s!important}
+    .nav-cta:hover{background:var(--azul-dark)!important;transform:translateY(-1px)!important}
+    .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .nav-hamburger span{width:24px;height:2px;background:var(--blanco);border-radius:2px;transition:all 0.3s}
+
+    /* ── HERO ── */
+    #hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:80px 5% 60px}
+    .hero-bg{position:absolute;inset:0}
+    .hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0.18;filter:blur(2px);transform:scale(1.05)}
+    #hero::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,13,13,0.95) 0%,rgba(13,13,13,0.75) 50%,rgba(41,171,226,0.12) 100%)}
+    .hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1100px;margin:0 auto;width:100%;position:relative;z-index:1}
+    .hero-img-wrap{display:flex;justify-content:center;align-items:center}
+    .hero-img-ring{width:340px;height:340px;border-radius:24px;padding:5px;background:conic-gradient(var(--azul),#1A8BBF,rgba(255,255,255,0.3),var(--azul));animation:float 4s ease-in-out infinite;box-shadow:0 0 60px rgba(41,171,226,0.35),0 20px 60px rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center}
+    .hero-img-ring img{width:100%;height:100%;border-radius:20px;object-fit:contain;background:#fff;padding:18px}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+    .hero-content{display:flex;flex-direction:column;gap:18px}
+    .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(41,171,226,0.15);color:var(--azul);font-weight:700;font-size:0.75rem;padding:6px 14px;border-radius:4px;width:fit-content;border:1px solid rgba(41,171,226,0.3);text-transform:uppercase;letter-spacing:1.5px}
+    .hero-badge::before{content:'📍'}
+    .hero-name{font-family:'Barlow Condensed',sans-serif;font-size:clamp(3rem,6.5vw,5.2rem);color:var(--blanco);line-height:0.9;font-weight:900;letter-spacing:3px;text-transform:uppercase}
+    .hero-name span{color:var(--azul)}
+    .hero-tagline{font-family:'Barlow Condensed',sans-serif;font-size:clamp(1rem,2vw,1.35rem);color:rgba(255,255,255,0.55);font-weight:500;letter-spacing:2px;text-transform:uppercase}
+    .hero-bio{font-size:1rem;color:rgba(255,255,255,0.6);line-height:1.6;font-weight:500;max-width:460px}
+    .hero-stats{display:flex;gap:24px;flex-wrap:wrap;align-items:center;padding:20px 0;border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08)}
+    .stat{text-align:center}
+    .stat-num{font-family:'Barlow Condensed',sans-serif;font-size:2rem;color:var(--azul);display:block;font-weight:800;letter-spacing:1px}
+    .stat-label{font-size:0.65rem;color:rgba(255,255,255,0.4);font-weight:600;text-transform:uppercase;letter-spacing:0.8px}
+    .stat-divider{width:1px;height:44px;background:rgba(255,255,255,0.1)}
+    .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--azul);color:white;text-decoration:none;padding:14px 28px;border-radius:5px;font-weight:700;font-size:0.95rem;font-family:'Barlow',sans-serif;transition:transform 0.2s,box-shadow 0.2s,background 0.2s;text-transform:uppercase;letter-spacing:0.5px}
+    .btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(41,171,226,0.4);background:var(--azul-dark)}
+    .btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:rgba(255,255,255,0.75);text-decoration:none;padding:14px 28px;border-radius:5px;font-weight:700;font-size:0.95rem;border:1px solid rgba(255,255,255,0.2);transition:all 0.2s;text-transform:uppercase;letter-spacing:0.5px}
+    .btn-outline:hover{border-color:var(--azul);color:var(--azul)}
+    .hero-socials{display:flex;gap:14px;align-items:center}
+    .social-pill{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,0.5);font-size:0.78rem;font-weight:600;text-decoration:none;transition:color 0.2s}
+    .social-pill:hover{color:var(--azul)}
+    .social-pill svg{width:16px;height:16px;fill:currentColor}
+    .social-btns{display:flex;gap:10px;flex-wrap:wrap}
+    .btn-social{display:inline-flex;align-items:center;gap:8px;text-decoration:none;padding:11px 18px;border-radius:6px;font-weight:700;font-size:0.82rem;transition:transform 0.2s,box-shadow 0.2s,filter 0.2s;text-transform:uppercase;letter-spacing:0.5px;color:white}
+    .btn-social svg{width:18px;height:18px;fill:white;flex-shrink:0}
+    .btn-social:hover{transform:translateY(-3px);filter:brightness(1.1)}
+    .btn-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+    .btn-ig:hover{box-shadow:0 8px 24px rgba(220,39,67,0.45)}
+    .btn-tt{background:#111;border:1px solid rgba(255,255,255,0.15)}
+    .btn-tt:hover{box-shadow:0 8px 24px rgba(0,0,0,0.6)}
+    .btn-fb{background:#1877F2}
+    .btn-fb:hover{box-shadow:0 8px 24px rgba(24,119,242,0.45)}
+
+    /* ── TICKER ── */
+    #ticker{background:var(--azul);color:white;padding:13px 0;overflow:hidden}
+    .ticker-track{display:flex;gap:50px;animation:ticker 30s linear infinite;white-space:nowrap;width:max-content}
+    .ticker-item{display:flex;align-items:center;gap:8px;font-weight:700;font-size:0.82rem;flex-shrink:0;font-family:'Barlow Condensed',sans-serif;letter-spacing:2px;text-transform:uppercase}
+    .ticker-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.5);flex-shrink:0}
+    @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+    /* ── SECTIONS ── */
+    section{padding:90px 5%}
+    .section-header{text-align:center;margin-bottom:56px}
+    .section-tag{display:inline-block;background:rgba(41,171,226,0.12);color:var(--azul);font-weight:700;font-size:0.7rem;padding:5px 14px;border-radius:4px;text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;border:1px solid rgba(41,171,226,0.25)}
+    .section-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2rem,4vw,3.2rem);color:var(--blanco);font-weight:800;letter-spacing:1px;text-transform:uppercase}
+    .section-title span{color:var(--azul)}
+    .section-sub{color:var(--gris-mid);font-size:0.97rem;margin-top:10px;font-weight:500}
+    .max-w{max-width:1100px;margin:0 auto}
+
+    /* ── SERVICIOS ── */
+    #servicios{background:var(--oscuro-soft)}
+    .servicios-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1100px;margin:0 auto}
+    .servicio-card{background:var(--oscuro-card);border-radius:10px;padding:32px 24px;border:1px solid rgba(255,255,255,0.06);transition:transform 0.25s,border-color 0.25s,box-shadow 0.25s;position:relative;overflow:hidden}
+    .servicio-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--azul);transform:scaleX(0);transform-origin:left;transition:transform 0.3s}
+    .servicio-card:hover{transform:translateY(-6px);border-color:rgba(41,171,226,0.3);box-shadow:0 20px 50px rgba(0,0,0,0.4)}
+    .servicio-card:hover::before{transform:scaleX(1)}
+    .servicio-icon{width:52px;height:52px;background:rgba(41,171,226,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:1.6rem;border:1px solid rgba(41,171,226,0.2)}
+    .servicio-card h3{font-family:'Barlow Condensed',sans-serif;font-size:1.3rem;font-weight:800;color:var(--blanco);margin-bottom:10px;text-transform:uppercase;letter-spacing:1px}
+    .servicio-card p{font-size:0.88rem;color:var(--gris-mid);line-height:1.6;font-weight:500}
+
+    /* ── MEMBRESÍAS ── */
+    #membresias{background:var(--oscuro)}
+    .membresias-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:0 auto}
+    .mem-card{background:var(--oscuro-card);border-radius:12px;padding:36px 28px;border:1px solid rgba(255,255,255,0.07);transition:transform 0.25s,box-shadow 0.25s;position:relative;overflow:hidden}
+    .mem-card.featured{border-color:var(--azul);box-shadow:0 0 0 1px var(--azul),0 20px 60px rgba(41,171,226,0.2)}
+    .mem-badge{position:absolute;top:16px;right:16px;background:var(--azul);color:white;font-size:0.65rem;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:1px}
+    .mem-card:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,0.5)}
+    .mem-card.featured:hover{box-shadow:0 0 0 1px var(--azul),0 25px 60px rgba(41,171,226,0.35)}
+    .mem-icon{font-size:2rem;margin-bottom:16px}
+    .mem-name{font-family:'Barlow Condensed',sans-serif;font-size:1.5rem;font-weight:800;color:var(--blanco);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px}
+    .mem-price{display:flex;align-items:baseline;gap:4px;margin:16px 0}
+    .mem-price .currency{font-size:1.1rem;color:var(--azul);font-weight:700}
+    .mem-price .amount{font-family:'Barlow Condensed',sans-serif;font-size:3.5rem;color:var(--azul);font-weight:900;line-height:1}
+    .mem-price .period{font-size:0.85rem;color:var(--gris-mid);font-weight:500}
+    .mem-desc{font-size:0.88rem;color:var(--gris-mid);margin-bottom:20px;line-height:1.55}
+    .mem-features{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:28px}
+    .mem-features li{display:flex;align-items:center;gap:8px;font-size:0.88rem;color:rgba(255,255,255,0.7);font-weight:500}
+    .mem-features li::before{content:'✓';color:var(--azul);font-weight:700;flex-shrink:0}
+    .mem-btn{display:block;text-align:center;background:transparent;color:var(--azul);text-decoration:none;padding:12px 20px;border-radius:5px;font-weight:700;font-size:0.9rem;border:1.5px solid var(--azul);transition:all 0.2s;text-transform:uppercase;letter-spacing:0.5px}
+    .mem-card.featured .mem-btn{background:var(--azul);color:white}
+    .mem-btn:hover{background:var(--azul);color:white;transform:translateY(-2px)}
+    .mem-extra{margin-top:40px;text-align:center;background:var(--oscuro-card);border-radius:10px;padding:24px;border:1px solid rgba(255,255,255,0.06);max-width:1000px;margin:40px auto 0}
+    .mem-extra p{color:var(--gris-mid);font-size:0.88rem}
+    .mem-extra strong{color:var(--blanco)}
+    .mem-extra-pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .mem-pill{background:rgba(41,171,226,0.1);color:var(--azul);font-size:0.78rem;font-weight:600;padding:5px 14px;border-radius:20px;border:1px solid rgba(41,171,226,0.2);text-transform:uppercase;letter-spacing:0.5px}
+
+    /* ── GALERÍA ── */
+    #galeria{background:var(--oscuro-soft)}
+    .galeria-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-width:1100px;margin:0 auto}
+    .galeria-item{aspect-ratio:1;overflow:hidden;border-radius:6px;position:relative;cursor:pointer}
+    .galeria-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s,filter 0.4s}
+    .galeria-item:hover img{transform:scale(1.08);filter:brightness(1.1)}
+    .galeria-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(41,171,226,0.4),transparent);opacity:0;transition:opacity 0.3s}
+    .galeria-item:hover::after{opacity:1}
+    .galeria-item.featured{grid-column:span 2;grid-row:span 2}
+
+    /* ── GYM BRO ── */
+    #gymBro{background:var(--oscuro);padding:60px 5%}
+    .gymBro-inner{max-width:1100px;margin:0 auto;background:linear-gradient(135deg,var(--oscuro-card),rgba(41,171,226,0.08));border:1px solid rgba(41,171,226,0.2);border-radius:16px;padding:50px 60px;display:flex;align-items:center;gap:50px}
+    .gymBro-icon{font-size:5rem;flex-shrink:0}
+    .gymBro-content h2{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;text-transform:uppercase;letter-spacing:2px;color:var(--blanco);margin-bottom:10px}
+    .gymBro-content h2 span{color:var(--azul)}
+    .gymBro-content p{font-size:1rem;color:var(--gris-mid);line-height:1.6;max-width:500px}
+
+    /* ── REDES ── */
+    #redes{background:var(--oscuro-soft)}
+    .redes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px;margin:0 auto}
+    .red-card{background:var(--oscuro-card);border-radius:10px;padding:28px 24px;border:1px solid rgba(255,255,255,0.07);text-align:center;text-decoration:none;transition:transform 0.25s,border-color 0.25s,box-shadow 0.25s;display:flex;flex-direction:column;align-items:center;gap:12px;cursor:pointer}
+    .red-card:hover{transform:translateY(-5px);border-color:rgba(41,171,226,0.35);box-shadow:0 15px 40px rgba(41,171,226,0.15)}
+    .red-card svg{width:32px;height:32px}
+    .red-card .red-name{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;color:var(--blanco);text-transform:uppercase;letter-spacing:1.5px}
+    .red-card .red-handle{font-size:0.82rem;color:var(--azul);font-weight:600}
+    .red-card .red-stats{font-family:'Barlow Condensed',sans-serif;font-size:1.5rem;font-weight:800;color:var(--blanco)}
+    .red-card .red-stats-label{font-size:0.7rem;color:var(--gris-mid);text-transform:uppercase;letter-spacing:0.5px}
+    .red-card .red-btn{margin-top:6px;background:var(--azul);color:white;font-size:0.78rem;font-weight:700;padding:8px 18px;border-radius:4px;text-transform:uppercase;letter-spacing:1px;transition:background 0.2s;pointer-events:none}
+    .red-card:hover .red-btn{background:var(--azul-dark)}
+
+    /* ── CONTACTO ── */
+    #contacto{background:var(--oscuro);padding:90px 5%}
+    .contacto-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+    .contacto-info h2{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;text-transform:uppercase;letter-spacing:2px;color:var(--blanco);margin-bottom:8px}
+    .contacto-info h2 span{color:var(--azul)}
+    .contacto-info .sub{color:var(--gris-mid);margin-bottom:36px;font-size:0.97rem}
+    .contacto-items{display:flex;flex-direction:column;gap:18px}
+    .contacto-item{display:flex;align-items:flex-start;gap:14px}
+    .contacto-item-icon{width:42px;height:42px;background:rgba(41,171,226,0.12);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;border:1px solid rgba(41,171,226,0.2)}
+    .contacto-item-text strong{display:block;font-size:0.75rem;color:var(--azul);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px}
+    .contacto-item-text span{font-size:0.93rem;color:rgba(255,255,255,0.75);font-weight:500}
+    .contacto-map{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);height:320px;background:var(--oscuro-card);display:flex;align-items:center;justify-content:center}
+    .contacto-map iframe{width:100%;height:100%;border:none;filter:invert(90%) hue-rotate(180deg)}
+    .btn-whatsapp{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:white;text-decoration:none;padding:14px 28px;border-radius:6px;font-weight:700;font-size:0.95rem;margin-top:28px;transition:transform 0.2s,box-shadow 0.2s;text-transform:uppercase;letter-spacing:0.5px}
+    .btn-whatsapp:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(37,211,102,0.35)}
+
+    /* ── FOOTER ── */
+    footer{background:rgba(0,0,0,0.6);border-top:1px solid rgba(255,255,255,0.06);padding:36px 5%;text-align:center}
+    .footer-logo{font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:800;color:var(--blanco);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px}
+    .footer-logo span{color:var(--azul)}
+    footer p{color:rgba(255,255,255,0.3);font-size:0.8rem}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      .nav-links{display:none}
+      .nav-hamburger{display:flex}
+      .hero-inner{grid-template-columns:1fr;text-align:center}
+      .hero-img-wrap{order:-1}
+      .hero-img-ring{width:220px;height:220px}
+      .hero-stats{justify-content:center}
+      .hero-ctas,.hero-socials{justify-content:center}
+      .hero-badge{margin:0 auto}
+      .hero-bio{margin:0 auto}
+      .servicios-grid{grid-template-columns:repeat(2,1fr)}
+      .membresias-grid{grid-template-columns:1fr}
+      .galeria-grid{grid-template-columns:repeat(2,1fr)}
+      .galeria-item.featured{grid-column:span 1;grid-row:span 1}
+      .gymBro-inner{flex-direction:column;text-align:center;padding:36px 28px}
+      .gymBro-inner p{margin:0 auto}
+      .redes-grid{grid-template-columns:1fr}
+      .contacto-inner{grid-template-columns:1fr}
+    }
+    @media(max-width:540px){
+      .servicios-grid{grid-template-columns:1fr}
+      .hero-name{font-size:2.8rem}
+      section{padding:60px 5%}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="https://www.instagram.com/elevate.gym.1" target="_blank" rel="noopener" class="nav-logo">
+    <img src="assets/logo elevate.png" alt="Elevate Gym">
+    <div class="nav-logo-text">
+      <span class="name">ELEVATE <em>GYM</em></span>
+      <span class="sub">AND RACQUET</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#membresias">Membresías</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#redes">Redes</a></li>
+    <li><a href="#contacto" class="nav-cta">Únete</a></li>
+  </ul>
+  <button class="nav-hamburger" onclick="document.querySelector('.nav-links').style.display=document.querySelector('.nav-links').style.display==='flex'?'none':'flex'" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg">
+    <img src="assets/post_3.jpg" alt="Elevate Gym Chihuahua">
+  </div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">Chihuahua · Av. Agustín Melgar 3505</div>
+      <h1 class="hero-name">ELEVATE<br><span>GYM AND</span><br>RACQUET</h1>
+      <p class="hero-tagline">Gym · Raqueta · Clases · Suplementos</p>
+      <p class="hero-bio">El gym que te eleva. Equipamiento de primera, canchas de raqueta, clases grupales y una comunidad que te impulsa a ser mejor cada día.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">2.5K</span>
+          <span class="stat-label">Seguidores IG</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">50</span>
+          <span class="stat-label">Posts</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">$500</span>
+          <span class="stat-label">Desde/mes</span>
+        </div>
+      </div>
+      <div class="hero-ctas">
+        <a href="#membresias" class="btn-primary">Ver membresías</a>
+        <a href="#contacto" class="btn-outline">Cómo llegar</a>
+      </div>
+      <div class="social-btns">
+        <a href="https://www.instagram.com/elevate.gym.1" target="_blank" rel="noopener" class="btn-social btn-ig">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          Instagram
+        </a>
+        <a href="https://www.tiktok.com/@elevate.gym.0" target="_blank" rel="noopener" class="btn-social btn-tt">
+          <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.12 8.12 0 004.76 1.52V6.78a4.85 4.85 0 01-1-.09z"/></svg>
+          TikTok
+        </a>
+        <a href="https://www.facebook.com/ELEVATE.GYM1" target="_blank" rel="noopener" class="btn-social btn-fb">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
+        </a>
+      </div>
+    </div>
+    <div class="hero-img-wrap">
+      <div class="hero-img-ring">
+        <img src="assets/logo elevate.png" alt="Elevate Gym and Racquet logo">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TICKER ── -->
+<div id="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">🏋️ Gym Completo</span><span class="ticker-dot"></span>
+    <span class="ticker-item">🎾 Canchas de Raqueta</span><span class="ticker-dot"></span>
+    <span class="ticker-item">💃 Ritmos Latinos</span><span class="ticker-dot"></span>
+    <span class="ticker-item">💪 Membresía desde $500/mes</span><span class="ticker-dot"></span>
+    <span class="ticker-item">👥 Gym Bro Fridays</span><span class="ticker-dot"></span>
+    <span class="ticker-item">📍 Chihuahua · Av. Agustín Melgar 3505</span><span class="ticker-dot"></span>
+    <span class="ticker-item">🏋️ Gym Completo</span><span class="ticker-dot"></span>
+    <span class="ticker-item">🎾 Canchas de Raqueta</span><span class="ticker-dot"></span>
+    <span class="ticker-item">💃 Ritmos Latinos</span><span class="ticker-dot"></span>
+    <span class="ticker-item">💪 Membresía desde $500/mes</span><span class="ticker-dot"></span>
+    <span class="ticker-item">👥 Gym Bro Fridays</span><span class="ticker-dot"></span>
+    <span class="ticker-item">📍 Chihuahua · Av. Agustín Melgar 3505</span><span class="ticker-dot"></span>
+  </div>
+</div>
+
+<!-- ── SERVICIOS ── -->
+<section id="servicios">
+  <div class="section-header">
+    <div class="section-tag">Qué ofrecemos</div>
+    <h2 class="section-title">TODO LO QUE <span>NECESITAS</span></h2>
+    <p class="section-sub">Un solo lugar para entrenar, jugar y superarte</p>
+  </div>
+  <div class="servicios-grid">
+    <div class="servicio-card">
+      <div class="servicio-icon">🏋️</div>
+      <h3>Gym Completo</h3>
+      <p>Zona de pesas libre, maquinaria de cardio y equipamiento de primera calidad para todos los niveles.</p>
+    </div>
+    <div class="servicio-card">
+      <div class="servicio-icon">🎾</div>
+      <h3>Canchas de Raqueta</h3>
+      <p>Canchas disponibles para tenis y racquetball. Reserva tu cancha y reta a quien quieras.</p>
+    </div>
+    <div class="servicio-card">
+      <div class="servicio-icon">💃</div>
+      <h3>Clases Grupales</h3>
+      <p>Ritmos Latinos, y más clases incluidas con tu membresía. Instructores certificados y ambiente motivador.</p>
+    </div>
+    <div class="servicio-card">
+      <div class="servicio-icon">🥤</div>
+      <h3>Suplementos y Productos</h3>
+      <p>Tienda con C4, proteínas, Gatorade, agua y más. Todo lo que tu entrenamiento necesita en un solo lugar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── MEMBRESÍAS ── -->
+<section id="membresias">
+  <div class="section-header">
+    <div class="section-tag">Planes</div>
+    <h2 class="section-title">ELIGE TU <span>MEMBRESÍA</span></h2>
+    <p class="section-sub">Sin excusas, hay un plan para cada quien</p>
+  </div>
+  <div class="membresias-grid">
+    <div class="mem-card">
+      <div class="mem-icon">💃</div>
+      <div class="mem-name">Class</div>
+      <p class="mem-desc">Perfecto si quieres clases grupales sin pesas. Acceso ilimitado a todas las clases del mes.</p>
+      <div class="mem-price">
+        <span class="currency">$</span>
+        <span class="amount">500</span>
+        <span class="period">/ mes</span>
+      </div>
+      <ul class="mem-features">
+        <li>Todas las clases grupales</li>
+        <li>Ritmos Latinos incluido</li>
+        <li>Clases nuevas conforme se agregan</li>
+        <li>Acceso a instalaciones</li>
+      </ul>
+      <a href="#contacto" class="mem-btn">Inscríbete</a>
+    </div>
+    <div class="mem-card featured">
+      <span class="mem-badge">Más popular</span>
+      <div class="mem-icon">🏋️</div>
+      <div class="mem-name">Full</div>
+      <p class="mem-desc">Acceso total: gym, pesas, cardio y todas las clases grupales incluidas en una sola membresía.</p>
+      <div class="mem-price">
+        <span class="currency">$</span>
+        <span class="amount">800</span>
+        <span class="period">/ mes</span>
+      </div>
+      <ul class="mem-features">
+        <li>Gym completo (pesas + cardio)</li>
+        <li>Todas las clases grupales</li>
+        <li>Acceso a canchas de raqueta</li>
+        <li>Gym Bro Fridays — invitado gratis</li>
+        <li>Descuentos en productos</li>
+      </ul>
+      <a href="#contacto" class="mem-btn">Inscríbete</a>
+    </div>
+    <div class="mem-card">
+      <div class="mem-icon">📅</div>
+      <div class="mem-name">Flexible</div>
+      <p class="mem-desc">¿Prefieres probar o pagar por adelantado? Tenemos opciones para todos los ritmos de vida.</p>
+      <div class="mem-price" style="flex-direction:column;gap:0">
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:1.5rem;color:var(--azul);font-weight:800">A tu medida</span>
+      </div>
+      <ul class="mem-features">
+        <li>Visita del día</li>
+        <li>Semana completa</li>
+        <li>3 meses con descuento</li>
+        <li>6 meses con descuento</li>
+        <li>Anualidad — mejor precio</li>
+      </ul>
+      <a href="#contacto" class="mem-btn">Consultar precios</a>
+    </div>
+  </div>
+  <div class="mem-extra">
+    <p><strong>¿Quieres más beneficios?</strong> Inscríbete o reinscríbete y entra automáticamente a nuestra rifa mensual.</p>
+    <div class="mem-extra-pills">
+      <span class="mem-pill">Rifa tatuaje 20cm</span>
+      <span class="mem-pill">Productos con premio</span>
+      <span class="mem-pill">Gym Bro Fridays</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── GALERÍA ── -->
+<section id="galeria">
+  <div class="section-header">
+    <div class="section-tag">Feed de Instagram</div>
+    <h2 class="section-title">EL GYM POR <span>DENTRO</span></h2>
+    <p class="section-sub">Síguenos en <strong style="color:var(--azul)">@elevate.gym.1</strong></p>
+  </div>
+  <div class="galeria-grid max-w">
+    <div class="galeria-item featured">
+      <img src="assets/post_3.jpg" alt="Elevate Gym fachada">
+    </div>
+    <div class="galeria-item">
+      <img src="assets/post_8.jpg" alt="Elevate Gym recepción">
+    </div>
+    <div class="galeria-item">
+      <img src="assets/post_4.jpg" alt="Elevate Gym promo">
+    </div>
+    <div class="galeria-item">
+      <img src="assets/post_6.jpg" alt="Ritmos Latinos">
+    </div>
+    <div class="galeria-item">
+      <img src="assets/post_5.jpg" alt="Elevate Gym productos">
+    </div>
+    <div class="galeria-item">
+      <img src="assets/post_7.jpg" alt="Gym Bro Fridays">
+    </div>
+  </div>
+</section>
+
+<!-- ── GYM BRO ── -->
+<div id="gymBro">
+  <div class="gymBro-inner max-w">
+    <div class="gymBro-icon">🤝</div>
+    <div class="gymBro-content">
+      <h2>TODOS LOS VIERNES:<br><span>GYM BRO</span></h2>
+      <p>¿Tienes un amigo que siempre promete ir al gym pero nunca va? Los viernes es su oportunidad. Trae un invitado completamente gratis cada semana. Sin condiciones.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── REDES ── -->
+<section id="redes">
+  <div class="section-header">
+    <div class="section-tag">Síguenos</div>
+    <h2 class="section-title">ENCUÉNTRANOS <span>EN REDES</span></h2>
+    <p class="section-sub">Contenido, promos y motivación diaria</p>
+  </div>
+  <div class="redes-grid max-w">
+    <div class="red-card" onclick="window.open('https://www.instagram.com/elevate.gym.1','_blank')">
+      <svg viewBox="0 0 24 24" fill="#29ABE2"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      <div class="red-name">Instagram</div>
+      <div class="red-handle">@elevate.gym.1</div>
+      <div class="red-stats">2,540</div>
+      <div class="red-stats-label">seguidores</div>
+      <div class="red-btn">Seguir →</div>
+    </div>
+    <div class="red-card" onclick="window.open('https://www.tiktok.com/@elevate.gym.0','_blank')">
+      <svg viewBox="0 0 24 24" fill="#29ABE2"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.12 8.12 0 004.76 1.52V6.78a4.85 4.85 0 01-1-.09z"/></svg>
+      <div class="red-name">TikTok</div>
+      <div class="red-handle">@elevate.gym.0</div>
+      <div class="red-stats-label">síguenos</div>
+      <div class="red-btn">Seguir →</div>
+    </div>
+    <div class="red-card" onclick="window.open('https://www.facebook.com/ELEVATE.GYM1','_blank')">
+      <svg viewBox="0 0 24 24" fill="#29ABE2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      <div class="red-name">Facebook</div>
+      <div class="red-handle">ELEVATE.GYM1</div>
+      <div class="red-stats-label">síguenos</div>
+      <div class="red-btn">Seguir →</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACTO ── -->
+<section id="contacto">
+  <div class="contacto-inner">
+    <div class="contacto-info">
+      <h2>VEN A <span>ELEVARTE</span></h2>
+      <p class="sub">Estamos en Chihuahua, esperándote.</p>
+      <div class="contacto-items">
+        <div class="contacto-item">
+          <div class="contacto-item-icon">📍</div>
+          <div class="contacto-item-text">
+            <strong>Dirección</strong>
+            <span>Av. Agustín Melgar 3505, Chihuahua, Chih.</span>
+          </div>
+        </div>
+        <div class="contacto-item">
+          <div class="contacto-item-icon">📞</div>
+          <div class="contacto-item-text">
+            <strong>WhatsApp / Teléfono</strong>
+            <span>+52 1 614 124 3258</span>
+          </div>
+        </div>
+        <div class="contacto-item">
+          <div class="contacto-item-icon">📸</div>
+          <div class="contacto-item-text">
+            <strong>Instagram</strong>
+            <span>@elevate.gym.1</span>
+          </div>
+        </div>
+        <div class="contacto-item">
+          <div class="contacto-item-icon">🎵</div>
+          <div class="contacto-item-text">
+            <strong>TikTok</strong>
+            <span>@elevate.gym.0</span>
+          </div>
+        </div>
+        <div class="contacto-item">
+          <div class="contacto-item-icon">👥</div>
+          <div class="contacto-item-text">
+            <strong>Facebook</strong>
+            <span>ELEVATE.GYM1</span>
+          </div>
+        </div>
+      </div>
+      <a href="https://wa.me/5216141243258" target="_blank" rel="noopener" class="btn-whatsapp" style="margin-top:28px;width:fit-content">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+    <div class="contacto-map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.5!2d-106.0731!3d28.6330!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sAv.+Agust%C3%ADn+Melgar+3505%2C+Chihuahua!5e0!3m2!1ses!2smx!4v1"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Elevate Gym en el mapa">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHATSAPP FLOTANTE ── -->
+<a href="https://wa.me/5216141243258" target="_blank" rel="noopener" title="Escríbenos por WhatsApp" style="position:fixed;bottom:28px;right:28px;z-index:999;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(37,211,102,0.5);transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='scale(1.12)';this.style.boxShadow='0 10px 30px rgba(37,211,102,0.6)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 6px 24px rgba(37,211,102,0.5)'">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">ELEVATE <span>GYM</span> AND RACQUET</div>
+  <p>Av. Agustín Melgar 3505 · Chihuahua, México · @elevate.gym.1</p>
+</footer>
+
+</body>
+</html>
